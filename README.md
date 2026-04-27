@@ -155,9 +155,21 @@ Tests Podcast Index API for podcast discovery.
 - Extract MP3 enclosure URLs
 - Check for transcript URLs
 
+**Coverage:** ~85-90% of all podcasts
+
 **Requirements:** Free API key from podcastindex.org
 
 **Output:** Metadata + direct MP3 URLs for audio download
+
+**Available:**
+- ✅ Most independent podcasts (Darknet Diaries, Lex Fridman)
+- ✅ Network podcasts (NPR, BBC, Wondery, Gimlet)
+- ✅ Popular shows (Huberman Lab, Crime Junkie, The Daily)
+
+**Not Available:**
+- ❌ Spotify exclusives (Joe Rogan, Call Her Daddy)
+- ❌ Premium subscriber content (Patreon-only, Apple subscriptions)
+- ❌ Private/corporate internal podcasts
 
 **Example:**
 ```bash
