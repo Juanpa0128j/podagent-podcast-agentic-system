@@ -1,0 +1,34 @@
+# No need to ignore docs - we want documentation in the repo
+
+# Environment variables (contains API keys)
+.env
+.env.local
+.env.production
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# uv
+.venv/
+uv.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Output files from validation scripts
+*_validation_results.json
+
