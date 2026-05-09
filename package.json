@@ -1,0 +1,16 @@
+{
+  "name": "podagent",
+  "version": "0.1.0",
+  "private": true,
+  "description": "PodAgent — agent-based system for interactive podcast intelligence",
+  "scripts": {
+    "dev:web": "pnpm --filter web dev",
+    "dev:server": "uv run --directory apps/server python -m podagent_server",
+    "build": "pnpm --filter web build",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}
