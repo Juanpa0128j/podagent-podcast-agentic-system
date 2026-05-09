@@ -4,7 +4,8 @@ from __future__ import annotations
 
 from fastmcp import FastMCP
 
-from podagent_server.mcp.tools import ingestion, library, retrieval
+from podagent_server.config import get_azure_openai_config
+from podagent_server.mcp.tools import ingestion, learnflow, library, retrieval
 
 mcp = FastMCP("podagent")
 
@@ -20,9 +21,15 @@ mcp.tool()(library.get_transcript_window)
 # Register retrieval tools
 mcp.tool()(retrieval.search_chunks)
 
+# Register LearnFlow tools
+mcp.tool()(learnflow.generate_plan)
+mcp.tool()(learnflow.generate_section_content)
+mcp.tool()(learnflow.answer_with_rag)
+
 
 def main() -> None:
     """Run the MCP server."""
+    get_azure_openai_config()
     mcp.run()
 
 

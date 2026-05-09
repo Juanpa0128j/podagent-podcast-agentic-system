@@ -23,6 +23,18 @@ class Settings:
             "postgresql+asyncpg://localhost/podagent",
         )
         self.openai_api_key: str | None = os.environ.get("OPENAI_API_KEY")
+        self.azure_openai_endpoint: str | None = os.environ.get("AZURE_OPENAI_ENDPOINT")
+        self.azure_openai_api_key: str | None = os.environ.get("AZURE_OPENAI_API_KEY")
+        self.azure_openai_deployment_chat: str | None = os.environ.get(
+            "AZURE_OPENAI_DEPLOYMENT_CHAT"
+        )
+        self.azure_openai_deployment_embeddings: str | None = os.environ.get(
+            "AZURE_OPENAI_DEPLOYMENT_EMBEDDINGS"
+        )
+        self.azure_openai_api_version: str = os.environ.get(
+            "AZURE_OPENAI_API_VERSION",
+            "2024-02-15-preview",
+        )
         self.supabase_jwt_secret: str | None = os.environ.get("SUPABASE_JWT_SECRET")
         self.environment: str = os.environ.get("ENVIRONMENT", "development")
 
@@ -48,17 +60,66 @@ def get_chunker() -> Chunker:
 
 
 def get_embedder() -> Embedder:
-    """Return the default embedder."""
+    """Return the default embedder.
+
+    Uses AzureOpenAIEmbedder when AZURE_OPENAI_DEPLOYMENT_EMBEDDINGS is set,
+    otherwise falls back to OpenAIEmbedder.
+    """
+    if settings.azure_openai_deployment_embeddings:
+        from podagent_server.retrieval.embeddings.azure_openai_embedder import (
+            AzureOpenAIEmbedder,
+        )
+
+        return AzureOpenAIEmbedder(
+            azure_endpoint=settings.azure_openai_endpoint or "",
+            api_key=settings.azure_openai_api_key or "",
+            deployment=settings.azure_openai_deployment_embeddings,
+            api_version=settings.azure_openai_api_version,
+        )
+
     from podagent_server.retrieval.embeddings.openai_embedder import OpenAIEmbedder
 
     return OpenAIEmbedder(api_key=settings.openai_api_key)
 
 
 def get_vector_store() -> VectorStore:
-    """Return the default vector store."""
-    from podagent_server.retrieval.vector_store.pgvector import PgVectorStore
+    """Return the default vector store.
 
-    return PgVectorStore(dsn=settings.database_url)
+    Uses InMemoryVectorStore by default.
+    Set PODAGENT_VECTOR_STORE=pgvector to use PgVectorStore instead.
+    """
+    if os.environ.get("PODAGENT_VECTOR_STORE") == "pgvector":
+        from podagent_server.retrieval.vector_store.pgvector import PgVectorStore
+
+        return PgVectorStore(dsn=settings.database_url)
+
+    from podagent_server.retrieval.vector_store.in_memory import InMemoryVectorStore
+
+    return InMemoryVectorStore()
+
+
+def get_azure_openai_config() -> "AzureOpenAIConfig":
+    """Return Azure OpenAI config or raise if required settings are missing."""
+    from podagent_server.learnflow.llm import AzureOpenAIConfig
+
+    missing: list[str] = []
+    if not settings.azure_openai_endpoint:
+        missing.append("AZURE_OPENAI_ENDPOINT")
+    if not settings.azure_openai_api_key:
+        missing.append("AZURE_OPENAI_API_KEY")
+    if not settings.azure_openai_deployment_chat:
+        missing.append("AZURE_OPENAI_DEPLOYMENT_CHAT")
+
+    if missing:
+        missing_vars = ", ".join(missing)
+        raise ValueError(f"Missing required Azure OpenAI settings: {missing_vars}")
+
+    return AzureOpenAIConfig(
+        endpoint=settings.azure_openai_endpoint,
+        api_key=settings.azure_openai_api_key,
+        deployment=settings.azure_openai_deployment_chat,
+        api_version=settings.azure_openai_api_version,
+    )
 
 
 def get_transcriber() -> Transcriber | None:

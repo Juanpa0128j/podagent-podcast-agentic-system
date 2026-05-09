@@ -7,7 +7,18 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "#00288e",
+        "primary-container": "#1e40af",
+        secondary: "#006c4a",
+        tertiary: "#611e00",
+        error: "#ba1a1a",
+        surface: "#f8f9ff",
+        "on-surface": "#0b1c30",
+        "surface-container": "#ffffff",
+      },
+    },
   },
   plugins: [],
 };
