@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard de Progreso - LearnFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed": "#370e00",
+                        "tertiary-fixed": "#ffdbce",
+                        "surface-container-low": "#eff4ff",
+                        "secondary-container": "#82f5c1",
+                        "background": "#f8f9ff",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-tertiary-container": "#ffa582",
+                        "on-surface": "#0b1c30",
+                        "tertiary-fixed-dim": "#ffb599",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary-container": "#00714e",
+                        "tertiary-container": "#872d00",
+                        "on-surface-variant": "#444653",
+                        "outline-variant": "#c4c5d5",
+                        "surface-variant": "#d3e4fe",
+                        "tertiary": "#611e00",
+                        "surface-container": "#e5eeff",
+                        "outline": "#757684",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-container-high": "#dce9ff",
+                        "secondary-fixed": "#85f8c4",
+                        "primary-fixed": "#dde1ff",
+                        "on-tertiary-fixed-variant": "#7f2b00",
+                        "primary": "#00288e",
+                        "on-primary-container": "#a8b8ff",
+                        "on-background": "#0b1c30",
+                        "inverse-primary": "#b8c4ff",
+                        "on-primary-fixed-variant": "#173bab",
+                        "inverse-surface": "#213145",
+                        "surface": "#f8f9ff",
+                        "primary-container": "#1e40af",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "secondary": "#006c4a",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#001453",
+                        "secondary-fixed-dim": "#68dba9",
+                        "surface-dim": "#cbdbf5",
+                        "inverse-on-surface": "#eaf1ff",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#005137",
+                        "surface-tint": "#3755c3",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#002114"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "32px",
+                        "margin-tablet": "40px",
+                        "gutter": "16px",
+                        "margin-mobile": "20px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "label-sm": ["Inter", "sans-serif"],
+                        "label-md": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "headline-sm": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.03em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-sm": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-center px-margin-mobile md:px-margin-tablet py-base max-w-[900px] mx-auto docked full-width sticky bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant/30 flat no shadows">
+<div class="flex items-center justify-between w-full">
+<!-- Brand -->
+<div class="text-headline-sm font-headline-md font-bold tracking-tight text-primary dark:text-primary-fixed">
+                LearnFlow
+            </div>
+<!-- Navigation Links (Desktop) -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 text-label-md font-label-md hover:bg-surface-container-low dark:hover:bg-inverse-surface rounded-lg transition-all px-3 py-2" href="#">
+                    Plan
+                </a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200 text-label-md font-label-md hover:bg-surface-container-low dark:hover:bg-inverse-surface rounded-lg transition-all px-3 py-2" href="#">
+                    Estudio
+                </a>
+<!-- Active State -->
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary dark:border-primary-fixed pb-1 text-label-md font-label-md hover:bg-surface-container-low dark:hover:bg-inverse-surface rounded-lg transition-all px-3 py-2 flex flex-col" href="#">
+                    Progreso
+                </a>
+</nav>
+<!-- Trailing Actions & Profile -->
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-variant border border-outline-variant/30">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A close-up portrait of a professional individual with a calm and focused expression, set against a clean, light-mode minimal background. The lighting is soft and flattering, highlighting a sense of clarity and mindfulness consistent with a premium edtech application. The colors are muted and natural, perfectly integrating with a sophisticated, uncluttered UI design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA7DyShSV7o4vQ4_2j6TbkdqPeC9_yim81bsCy5pW_pdFvkTTXOIM3b1tOTyqV4U6MDbBo99OW_DZ5UBTB39N1lt3EHhBiT9etGjYaQ7x_rCoasqcJZ48yX99vy1fIj-cLKjAaiGDLfZ3oOCgf-AEqVBC2nwU1q8ILTZ8FksU09nMvPn-ONjO7ZWwUlVHVK8LZMNhPcQtv3vUTs9VjSzhdvNWcAXG88fEJpHlyl2sUmmDXPx6Rbvkg6BTuM-XAP5v2_dp44MK-BE0"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-[100px] pb-section-gap px-margin-mobile md:px-margin-tablet w-full max-w-[900px] mx-auto flex flex-col gap-section-gap">
+<!-- Header Section -->
+<section class="flex flex-col gap-2">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Tu Progreso</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Mantén el ritmo, estás construyendo una base sólida.</p>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Card: General Progress (Spans 2 columns on desktop) -->
+<div class="md:col-span-2 bg-surface-container-lowest rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-outline-variant/20 p-6 flex flex-col justify-between gap-6 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-shadow">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Plan General</h2>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">Módulo Actual: Fundamentos Cognitivos</p>
+</div>
+<span class="material-symbols-outlined text-outline">trending_up</span>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-end">
+<span class="font-headline-md text-headline-md text-primary">42%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Meta: 100%</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-surface-variant rounded-full h-3 overflow-hidden">
+<div class="bg-primary h-full rounded-full w-[42%] transition-all duration-500 ease-out"></div>
+</div>
+</div>
+</div>
+<!-- Card: Streak -->
+<div class="col-span-1 bg-surface-container-lowest rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-outline-variant/20 p-6 flex flex-col items-center justify-center gap-4 text-center hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-shadow">
+<div class="w-16 h-16 rounded-full bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined filled text-[32px] text-tertiary-container">local_fire_department</span>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg text-tertiary-container">14</div>
+<div class="font-label-md text-label-md text-on-surface-variant mt-1">Días seguidos</div>
+</div>
+</div>
+<!-- Card: Plan Steps -->
+<div class="md:col-span-2 bg-surface-container-lowest rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-outline-variant/20 p-6 flex flex-col gap-4">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-2">Pasos del Plan</h2>
+<div class="flex flex-col">
+<!-- Completed Step -->
+<div class="flex items-center gap-4 py-4 border-b border-surface-variant">
+<span class="material-symbols-outlined filled text-secondary">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface-variant line-through opacity-70">Lectura Inicial: Principios</span>
+</div>
+<!-- Active Step -->
+<div class="flex items-center gap-4 py-4 border-b border-surface-variant bg-surface-container-low/50 -mx-6 px-6">
+<span class="material-symbols-outlined text-primary">radio_button_checked</span>
+<span class="font-body-md text-body-md text-on-surface font-medium">Repaso Activo: Flashcards Set A</span>
+</div>
+<!-- Pending Step -->
+<div class="flex items-center gap-4 py-4">
+<span class="material-symbols-outlined text-outline-variant">radio_button_unchecked</span>
+<span class="font-body-md text-body-md text-on-surface">Evaluación Formativa</span>
+</div>
+</div>
+</div>
+<!-- Card: Knowledge Stats -->
+<div class="col-span-1 bg-surface-container-lowest rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] border border-outline-variant/20 p-6 flex flex-col gap-6 hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)] transition-shadow">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Conocimiento</h2>
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Dominados</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">124</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-tertiary"></div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Por Repasar</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">18</span>
+</div>
+</div>
+<div class="mt-auto">
+<div class="w-full flex h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full" style="width: 87%"></div>
+<div class="bg-tertiary h-full" style="width: 13%"></div>
+</div>
+</div>
+</div>
+<!-- Card: Quick Check-in (Full width) -->
+<div class="md:col-span-3 bg-surface-container-highest rounded-xl border border-outline-variant/30 p-6 flex flex-col gap-6 mt-4">
+<div class="flex flex-col md:flex-row justify-between md:items-center gap-4">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Check-in Rápido</h2>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">Registra tus hábitos diarios para mantener el plan.</p>
+</div>
+<span class="material-symbols-outlined text-primary text-[28px]">assignment_turned_in</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Habit 1 -->
+<div class="flex items-center justify-between bg-surface-container-lowest p-4 rounded-lg border border-outline-variant/20">
+<span class="font-body-md text-body-md text-on-surface">¿Completaste 20 min de lectura?</span>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center bg-primary-container text-on-primary hover:bg-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</button>
+</div>
+</div>
+<!-- Habit 2 -->
+<div class="flex items-center justify-between bg-surface-container-lowest p-4 rounded-lg border border-outline-variant/20">
+<span class="font-body-md text-body-md text-on-surface">¿Revisaste las flashcards pendientes?</span>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center border border-outline-variant text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</button>
+</div>
+</div>
+</div>
+<button class="h-[56px] w-full md:w-auto md:self-end bg-primary-container text-on-primary px-8 rounded-lg font-label-md text-label-md mt-2 active:scale-[0.98] transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">save</span>
+                    Guardar Check-in
+                </button>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="mt-auto flex flex-col md:flex-row justify-between items-center w-full max-w-[900px] mx-auto px-margin-mobile gap-gutter full-width py-section-gap border-t border-outline-variant/20 bg-background dark:bg-background flat no shadows">
+<div class="text-label-md font-bold text-primary dark:text-primary-fixed">
+            © 2024 LearnFlow. Mindful EdTech.
+        </div>
+<div class="flex gap-6">
+<a class="text-on-surface-variant dark:text-outline-variant text-label-sm font-label-sm hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">
+                Support
+            </a>
+<a class="text-on-surface-variant dark:text-outline-variant text-label-sm font-label-sm hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">
+                Privacy
+            </a>
+<a class="text-on-surface-variant dark:text-outline-variant text-label-sm font-label-sm hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-80 hover:opacity-100 transition-opacity" href="#">
+                Terms
+            </a>
+</div>
+</footer>
+</body></html>
