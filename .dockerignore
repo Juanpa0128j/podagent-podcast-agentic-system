@@ -1,0 +1,12 @@
+#ignore
+.github
+.git
+.devcontainer
+node_modules
+.venv
+.next
+__pycache__
+*.egg-info
+*.pyc
+.env
+.env.local
