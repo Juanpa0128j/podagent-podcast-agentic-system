@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 import uuid
-from typing import Any
 
 from podagent_server.config import get_chunker, get_embedder, get_source_adapter, get_vector_store
-from podagent_server.storage.models import Chunk, Episode
+from podagent_server.storage.models import Episode
 
 
 async def run_ingestion_pipeline(source: str, ref: str) -> str:
-    """Run the full ingestion pipeline for a single episode.
+    """
+    Run the full ingestion pipeline for a single episode.
 
     Args:
         source: Source type (e.g. "upload").
@@ -18,6 +18,7 @@ async def run_ingestion_pipeline(source: str, ref: str) -> str:
 
     Returns:
         The job id for tracking progress.
+
     """
     job_id = str(uuid.uuid4())
 
@@ -48,7 +49,7 @@ async def run_ingestion_pipeline(source: str, ref: str) -> str:
     vectors = await embedder.embed(texts)
 
     # 5. Attach vectors and persist
-    for chunk, vector in zip(chunks, vectors):
+    for chunk, vector in zip(chunks, vectors, strict=False):
         chunk.embedding = vector
         chunk.episode_id = episode.id
     # TODO: persist chunks via ChunkRepo

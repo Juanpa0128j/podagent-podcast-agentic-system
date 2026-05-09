@@ -1,4 +1,5 @@
-"""UI resource hint generators.
+"""
+UI resource hint generators.
 
 These produce `_ui` keys on tool responses that compatible hosts
 (Claude Desktop, web client) can render as rich widgets.

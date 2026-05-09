@@ -12,12 +12,14 @@ class Chunker(Protocol):
     """Protocol for transcript chunking strategies."""
 
     def chunk(self, transcript: Transcript) -> list[Chunk]:
-        """Split a transcript into overlapping chunks.
+        """
+        Split a transcript into overlapping chunks.
 
         Args:
             transcript: The full transcript with segments.
 
         Returns:
             A list of Chunk objects with text and timestamp ranges.
+
         """
         ...

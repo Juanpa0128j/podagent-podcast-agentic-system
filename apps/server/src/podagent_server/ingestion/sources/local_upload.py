@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import os
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -16,7 +15,6 @@ class LocalUploadAdapter(SourceAdapter):
     async def fetch_metadata(self, ref: str) -> dict:
         """Derive metadata from the file path and contents."""
         path = Path(ref)
-        stat = path.stat()
         return {
             "title": path.stem,
             "description": "Uploaded transcript",
@@ -26,7 +24,8 @@ class LocalUploadAdapter(SourceAdapter):
         }
 
     async def fetch_transcript(self, ref: str) -> Transcript:
-        """Parse a local transcript file.
+        """
+        Parse a local transcript file.
 
         Supports VTT, SRT, and markdown with [hh:mm:ss] timestamps.
         """

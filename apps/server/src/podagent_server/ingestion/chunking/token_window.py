@@ -7,12 +7,14 @@ from podagent_server.storage.models import Chunk, Transcript
 
 
 class TokenWindowChunker(Chunker):
-    """Chunk transcript into fixed token windows with overlap.
+    """
+    Chunk transcript into fixed token windows with overlap.
 
     Phase 1 uses a naive word-count approximation.
     """
 
     def __init__(self, window_size: int = 750, overlap: int = 100) -> None:
+        """Initialize chunker with window size and overlap."""
         self.window_size = window_size
         self.overlap = overlap
 

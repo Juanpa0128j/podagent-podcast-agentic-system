@@ -15,7 +15,8 @@ async def hybrid_search(
     filters: dict[str, Any] | None = None,
     k: int = 8,
 ) -> list[dict[str, Any]]:
-    """Run a vector + metadata hybrid search.
+    """
+    Run a vector + metadata hybrid search.
 
     Args:
         query: Natural language query.
@@ -26,6 +27,7 @@ async def hybrid_search(
 
     Returns:
         Ranked chunks with metadata.
+
     """
     vectors = await embedder.embed([query])
     results = await vector_store.search(

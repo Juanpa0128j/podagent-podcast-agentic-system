@@ -9,12 +9,14 @@ from podagent_server.storage.models import Chunk
 
 
 class PgVectorStore(VectorStore):
-    """PostgreSQL pgvector-backed vector store.
+    """
+    PostgreSQL pgvector-backed vector store.
 
     Assumes a table `chunks` with a `vector(1536)` column.
     """
 
     def __init__(self, dsn: str) -> None:
+        """Initialize pgvector store."""
         self.dsn = dsn
 
     async def upsert(self, chunks: list[Chunk]) -> None:

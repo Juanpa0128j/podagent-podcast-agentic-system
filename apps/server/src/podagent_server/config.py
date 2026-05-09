@@ -6,8 +6,8 @@ import os
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from podagent_server.ingestion.sources.base import SourceAdapter
     from podagent_server.ingestion.chunking.base import Chunker
+    from podagent_server.ingestion.sources.base import SourceAdapter
     from podagent_server.ingestion.transcription.base import Transcriber
     from podagent_server.retrieval.embeddings.base import Embedder
     from podagent_server.retrieval.vector_store.base import VectorStore
@@ -17,6 +17,7 @@ class Settings:
     """Server settings loaded from environment."""
 
     def __init__(self) -> None:
+        """Load settings from environment."""
         self.database_url: str = os.environ.get(
             "DATABASE_URL",
             "postgresql+asyncpg://localhost/podagent",

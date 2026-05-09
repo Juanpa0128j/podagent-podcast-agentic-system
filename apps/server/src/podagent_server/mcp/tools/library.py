@@ -6,23 +6,27 @@ from typing import Any
 
 
 async def list_library() -> list[dict[str, Any]]:
-    """List all imported episodes in the user's library.
+    """
+    List all imported episodes in the user's library.
 
     Returns:
         A list of episode metadata dicts.
+
     """
     # TODO: implement via EpisodeRepo
     return []
 
 
 async def get_episode(episode_id: str) -> dict[str, Any]:
-    """Get metadata for a single episode.
+    """
+    Get metadata for a single episode.
 
     Args:
         episode_id: The episode UUID.
 
     Returns:
         Episode metadata and transcript URL.
+
     """
     # TODO: implement via EpisodeRepo
     return {
@@ -40,7 +44,8 @@ async def get_transcript_window(
     start_ts: float,
     end_ts: float,
 ) -> list[dict[str, Any]]:
-    """Get transcript chunks within a timestamp window.
+    """
+    Get transcript chunks within a timestamp window.
 
     Args:
         episode_id: The episode UUID.
@@ -49,6 +54,7 @@ async def get_transcript_window(
 
     Returns:
         A list of chunk dicts with text and timestamps.
+
     """
     # TODO: implement via ChunkRepo
     return []

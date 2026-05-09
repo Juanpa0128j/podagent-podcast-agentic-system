@@ -13,6 +13,7 @@ class OpenAIEmbedder(Embedder):
     """OpenAI text-embedding-3-small embedder."""
 
     def __init__(self, api_key: str | None = None, model: str = "text-embedding-3-small") -> None:
+        """Initialize OpenAI embedder."""
         self.api_key = api_key or os.environ.get("OPENAI_API_KEY")
         self.model = model
         self._client: openai.AsyncOpenAI | None = None

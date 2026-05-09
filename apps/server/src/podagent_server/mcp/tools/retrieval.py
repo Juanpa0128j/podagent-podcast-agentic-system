@@ -13,7 +13,8 @@ async def search_chunks(
     k: int = 8,
     filters: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
-    """Search for relevant transcript chunks.
+    """
+    Search for relevant transcript chunks.
 
     Args:
         query: The natural language query.
@@ -23,6 +24,7 @@ async def search_chunks(
 
     Returns:
         A list of ranked chunks with episode metadata and timestamps.
+
     """
     embedder = get_embedder()
     vector_store = get_vector_store()
