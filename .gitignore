@@ -29,6 +29,12 @@ uv.lock
 .DS_Store
 Thumbs.db
 
+# Node.js
+node_modules/
+.next/
+next-env.d.ts
+*.log
+
 # Output files from validation scripts
 *_validation_results.json
 
