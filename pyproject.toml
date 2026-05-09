@@ -9,7 +9,7 @@ requires-python = ">=3.10"
 python-downloads = "automatic"
 
 [tool.uv.workspace]
-members = ["apps/server", "packages/*"]
+members = ["apps/server"]
 
 [tool.ruff]
 line-length = 100
