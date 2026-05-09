@@ -29,20 +29,12 @@ export default function TopNav() {
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-3">
-          <button
-            type="button"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-slate-500"
-            aria-label="Notificaciones"
-          >
-            🔔
-          </button>
-          <button
-            type="button"
-            className="h-9 w-9 rounded-full bg-slate-200"
-            aria-label="Perfil"
-          />
-        </div>
+        <Link
+          href="/"
+          className="text-sm font-medium text-slate-500 transition hover:text-primary"
+        >
+          Nueva meta
+        </Link>
       </div>
     </header>
   );

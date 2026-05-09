@@ -15,7 +15,7 @@ function getRequiredEnv(key: string): string {
 }
 
 function buildHandler() {
-  const endpoint = getRequiredEnv("AZURE_OPENAI_ENDPOINT");
+  const endpoint = getRequiredEnv("AZURE_OPENAI_ENDPOINT").replace(/\/+$/, "");
   const apiKey = getRequiredEnv("AZURE_OPENAI_API_KEY");
   const deployment = getRequiredEnv("AZURE_OPENAI_DEPLOYMENT_CHAT");
   const apiVersion =

@@ -5,28 +5,36 @@ from __future__ import annotations
 import json
 from typing import Any
 
+LANGUAGE_RULE = (
+    "IMPORTANTE: TODO el contenido (titulos, descripciones, pasos, glosario, "
+    "preguntas, respuestas, razones) DEBE estar en espanol. "
+    "Las claves del JSON permanecen en ingles, pero los valores en espanol."
+)
+
 
 def build_plan_prompt(goal: str, retrieved_chunks: list[dict[str, Any]]) -> str:
     """Build prompt for plan generation."""
-    chunks_json = json.dumps(retrieved_chunks, ensure_ascii=True)
+    chunks_json = json.dumps(retrieved_chunks, ensure_ascii=False)
     return (
-        "You are a science-based wellness coach. "
-        f"The user has this goal: {goal}. "
-        f"You have access to these podcast episodes/sections: {chunks_json}. "
-        "Generate a structured learning plan in JSON format with fields: "
+        "Eres un coach de bienestar basado en evidencia cientifica. "
+        f"El objetivo del usuario es: {goal}. "
+        f"Tienes acceso a estos episodios/secciones de podcast: {chunks_json}. "
+        "Genera un plan de aprendizaje estructurado en formato JSON con los campos: "
         "goal, estimated_duration, phases (name, duration, steps[action, when, duration, why]), "
-        "dos (action, when, why), donts (action, why), relevant_content (section_id, reason)."
+        "dos (action, when, why), donts (action, why), relevant_content (section_id, reason). "
+        + LANGUAGE_RULE
     )
 
 
 def build_section_prompt(goal: str, transcript: str) -> str:
     """Build prompt for section content generation."""
     return (
-        "Generate educational content for this podcast section. "
-        f"The user's goal is: {goal}. "
-        f"The section transcript is: {transcript}. "
-        "Generate JSON with fields: summary, key_points, glossary (term, definition), "
-        "flashcards (id, question, answer), section_id."
+        "Genera contenido educativo para esta seccion del podcast. "
+        f"El objetivo del usuario es: {goal}. "
+        f"La transcripcion de la seccion es: {transcript}. "
+        "Genera un JSON con los campos: summary, key_points, glossary (term, definition), "
+        "flashcards (id, question, answer), section_id. "
+        + LANGUAGE_RULE
     )
 
 
@@ -36,12 +44,13 @@ def build_answer_prompt(
     retrieved_chunks: list[dict[str, Any]],
 ) -> str:
     """Build prompt for RAG answer generation."""
-    chunks_json = json.dumps(retrieved_chunks, ensure_ascii=True)
+    chunks_json = json.dumps(retrieved_chunks, ensure_ascii=False)
     context_text = context or ""
     return (
-        "Answer the user's question using the retrieved podcast chunks. "
-        f"Question: {question}. "
-        f"Context: {context_text}. "
-        f"Retrieved chunks: {chunks_json}. "
-        "Return JSON with fields: answer, citations (chunk_id, episode_id, ts_start, ts_end, text)."
+        "Responde la pregunta del usuario usando los fragmentos de podcast recuperados. "
+        f"Pregunta: {question}. "
+        f"Contexto: {context_text}. "
+        f"Fragmentos recuperados: {chunks_json}. "
+        "Responde en JSON con los campos: answer, citations (chunk_id, episode_id, ts_start, ts_end, text). "
+        + LANGUAGE_RULE
     )

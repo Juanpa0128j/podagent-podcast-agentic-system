@@ -15,6 +15,7 @@ export function CopilotShell({ children }: CopilotShellProps) {
     <CopilotKit runtimeUrl="/api/copilotkit">
       <AnswerAction />
       <CopilotSidebar
+        instructions="Eres el asistente de LearnFlow. SIEMPRE respondes en espanol. Ayudas al usuario a entender su plan de aprendizaje, secciones del podcast y conceptos cientificos. Cuando el usuario hace una pregunta sobre el contenido del podcast, usa la accion answerWithRag."
         labels={{
           title: "Asistente LearnFlow",
           initial:

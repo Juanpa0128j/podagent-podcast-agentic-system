@@ -118,29 +118,35 @@ export default function PlanView({ plan }: PlanViewProps) {
         </div>
       </div>
 
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Material recomendado</h2>
-        <div className="grid gap-4 md:grid-cols-2">
-          {plan.relevant_content.map((content) => (
-            <Link
-              key={content.section_id}
-              href={`/section/${encodeURIComponent(content.section_id)}`}
-              className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:border-primary hover:shadow-md"
-            >
-              <div className="h-16 w-16 rounded-lg bg-slate-200" />
-              <div className="space-y-1">
-                <h3 className="text-sm font-semibold text-on-surface">
-                  {content.section_id}
-                </h3>
-                <p className="text-xs text-slate-500">{content.reason}</p>
-                <span className="inline-flex rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-500">
-                  Abrir seccion →
-                </span>
-              </div>
-            </Link>
-          ))}
+      {plan.relevant_content.length > 0 ? (
+        <div className="space-y-4">
+          <h2 className="text-xl font-semibold">Material recomendado</h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            {plan.relevant_content.map((content, index) => (
+              <Link
+                key={content.section_id}
+                href={`/section/${encodeURIComponent(content.section_id)}`}
+                className="group flex items-start gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-primary hover:shadow-md"
+              >
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-lg font-semibold text-primary">
+                  {index + 1}
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-sm font-semibold text-on-surface">
+                    Seccion {index + 1}
+                  </h3>
+                  <p className="text-xs leading-relaxed text-slate-600">
+                    {content.reason}
+                  </p>
+                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:underline">
+                    Abrir seccion <span aria-hidden>→</span>
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
+      ) : null}
 
       <div className="flex justify-end">
         <Link

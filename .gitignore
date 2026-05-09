@@ -38,3 +38,6 @@ next-env.d.ts
 # Output files from validation scripts
 *_validation_results.json
 
+
+# Terminal Paste Image folder
+.cp-images/
